@@ -1,0 +1,36 @@
+services:
+  invoicepro:
+    container_name: invoicepro_container
+    build:
+      context: .
+      args:
+        CONTAINER_PORT: ${CONTAINER_PORT}
+    image: invoicepro:v1
+    restart: unless-stopped
+    env_file:
+      - ${ENV_FILE}
+    expose:
+      - ${CONTAINER_PORT}
+    ports:
+      - ${HOST_PORT}:${CONTAINER_PORT}
+#    depends_on:
+#      - db
+#    networks:
+#      - app-network
+#  db:
+#    image: mysql:8.0
+#    ports:
+#      - "3306:3306"
+##    env_file:
+##      - ${ENV_FILE}
+#    environment:
+#      MYSQL_DATABASE: ${MYSQL_DATABASE}
+#      MYSQL_USER: ${MYSQL_USERNAME}
+#      MYSQL_PASSWORD: ${MYSQL_PASSWORD}
+#      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOTPASSWORD}
+#    networks:
+#      - app-network
+
+#networks:
+#  app-network:
+#    driver: bridge
